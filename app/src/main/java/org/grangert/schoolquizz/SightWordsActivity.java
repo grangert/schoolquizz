@@ -9,7 +9,9 @@ import java.util.Set;
 /**
  * Created by grangert on 10/6/14.
  */
-public class QuestionGenerator {
+public class SightWordsActivity extends GameActivity {
+
+
     private final static Random RANDOM = new Random();
     //==============================================================================================
     //==============================================================================================
@@ -18,12 +20,13 @@ public class QuestionGenerator {
             "the", "like", "you", "went", "to", "of", "and", "in", "is", "that", "it", "he", "for", "was", "on", "are", "as", "with", "she", "they"
     };
 
-
-    public static int getGameDuration() {
+    @Deprecated
+    protected int getGameDuration() {
         return 2000;
     }
 
-    public static List<String> getResponseToPickFrom(int amountWordOnScreen) {
+    @Override
+    protected List<String> getResponseToPickFrom(int amountWordOnScreen) {
         List<String> selectedSightWords = new ArrayList<String>();
         Set<Integer> alreadyPickedIdx = new HashSet<Integer>();
         for (int i = 0; i < amountWordOnScreen; ) {
@@ -36,3 +39,4 @@ public class QuestionGenerator {
         return selectedSightWords;
     }
 }
+

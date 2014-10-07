@@ -9,14 +9,16 @@ import java.util.Set;
 /**
  * Created by grangert on 10/6/14.
  */
-public class QuestionGenerator {
+public class NumbersActivity extends GameActivity {
     private final static Random RANDOM = new Random();
 
-    public static int getGameDuration() {
+    @Override
+    protected int getGameDuration() {
         return 5000;
     }
 
-    public static List<String> getResponseToPickFrom(int amountChoiceOnScreen) {
+    @Override
+    protected List<String> getResponseToPickFrom(int amountChoiceOnScreen) {
         List<String> responseChoices = new ArrayList<String>();
         Set<Integer> alreadyPickedIdx = new HashSet<Integer>();
         for (int i = 0; i < amountChoiceOnScreen; ) {

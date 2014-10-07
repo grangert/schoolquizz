@@ -20,7 +20,7 @@ import java.util.Random;
 /**
  * Created by grangert on 10/5/14.
  */
-public class GameActivity extends Activity {
+public abstract class GameActivity extends Activity {
 
 
     private final static Random RANDOM = new Random();
@@ -38,14 +38,10 @@ public class GameActivity extends Activity {
     private int amountResponseOnScreen = 0;
     private int amountCorrectResponse = 0;
     private int amountWrongResponse = 0;
-    private MediaPlayer mpCorrect;
-    private MediaPlayer mpWrong;
-
-    private Handler countDownProgressBarHandler = new Handler();
     private Runnable countDownProgressBarRunnable = new Runnable() {
         public void run() {
             int currentValue = countDownProgressBar.getProgress();
-            currentValue -= (QuestionGenerator.getGameDuration() / (QuestionGenerator.getGameDuration() / 10));
+            currentValue -= (getGameDuration() / (getGameDuration() / 10));
             countDownProgressBar.setProgress(currentValue);
             if (currentValue > 0)
                 countDownProgressBarHandler.postDelayed(this, 10);
@@ -57,6 +53,11 @@ public class GameActivity extends Activity {
 
         }
     };
+    private MediaPlayer mpCorrect;
+    private MediaPlayer mpWrong;
+    private Handler countDownProgressBarHandler = new Handler();
+
+    protected abstract int getGameDuration();
     //==============================================================================================
     //==============================================================================================
 
@@ -92,9 +93,9 @@ public class GameActivity extends Activity {
 
 
     private void newGame() {
-        final List<String> responseChoices = QuestionGenerator.getResponseToPickFrom(amountResponseOnScreen);
-        countDownProgressBar.setMax(QuestionGenerator.getGameDuration());
-        countDownProgressBar.setProgress(QuestionGenerator.getGameDuration());
+        final List<String> responseChoices = getResponseToPickFrom(amountResponseOnScreen);
+        countDownProgressBar.setMax(getGameDuration());
+        countDownProgressBar.setProgress(getGameDuration());
         countDownProgressBarHandler.removeCallbacks(countDownProgressBarRunnable);
         countDownProgressBarHandler.post(countDownProgressBarRunnable);
         final int pickedOne = RANDOM.nextInt(amountResponseOnScreen);
@@ -108,8 +109,34 @@ public class GameActivity extends Activity {
         });
     }
 
+    protected abstract List<String> getResponseToPickFrom(int amountResponseOnScreen);
+
     //==============================================================================================
     //==============================================================================================
+
+    private void onWrongAnswer() {
+        mpWrong.start();
+        amountWrongResponse++;
+        refreshScore();
+    }
+
+    private void onGoodAnswer(View v) {
+        mpCorrect.start();
+        amountCorrectResponse++;
+        refreshScore();
+        countDownProgressBarHandler.removeCallbacks(countDownProgressBarRunnable);
+        v.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                newGame();
+            }
+        }, 1000l);
+    }
+
+    private void refreshScore() {
+        this.amountCorrectTextView.setText(String.valueOf(amountCorrectResponse));
+        this.amountWrongTextView.setText(String.valueOf(amountWrongResponse));
+    }
 
     /**
      *
@@ -146,29 +173,5 @@ public class GameActivity extends Activity {
             });
             return convertView;
         }
-    }
-
-    private void onWrongAnswer() {
-        mpWrong.start();
-        amountWrongResponse++;
-        refreshScore();
-    }
-
-    private void onGoodAnswer(View v) {
-        mpCorrect.start();
-        amountCorrectResponse++;
-        refreshScore();
-        countDownProgressBarHandler.removeCallbacks(countDownProgressBarRunnable);
-        v.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                newGame();
-            }
-        }, 1000l);
-    }
-
-    private void refreshScore() {
-        this.amountCorrectTextView.setText(String.valueOf(amountCorrectResponse));
-        this.amountWrongTextView.setText(String.valueOf(amountWrongResponse));
     }
 }
