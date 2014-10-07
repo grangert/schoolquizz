@@ -1,0 +1,32 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 'Google Inc.:Google APIs:14'
+    buildToolsVersion "20.0.0"
+
+    defaultConfig {
+        applicationId "org.grangert.sightwords"
+        minSdkVersion 14
+        targetSdkVersion 20
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors{
+        numbers{
+            applicationId "org.grangert.schoolquizz.numbers"
+        }
+        sightwords{
+            applicationId "org.grangert.schoolquizz.sightwords"
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
