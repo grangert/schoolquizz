@@ -21,10 +21,23 @@ public class MainActivity extends Activity {
                 startActivity(new Intent(MainActivity.this, NumbersActivity.class));
             }
         });
+        Button.class.cast(findViewById(R.id.launchabc_button)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ABCActivity.class));
+            }
+        });
         Button.class.cast(findViewById(R.id.launchsightwords_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, SightWordsActivity.class));
+            }
+        });
+
+        Button.class.cast(findViewById(R.id.fingercounting_button)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, CountingFingersActivity.class));
             }
         });
     }

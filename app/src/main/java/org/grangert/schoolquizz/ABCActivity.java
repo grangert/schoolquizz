@@ -9,20 +9,19 @@ import java.util.Set;
 /**
  * Created by grangert on 10/6/14.
  */
-public class SightWordsActivity extends GameActivity {
+public class ABCActivity extends GameActivity {
 
 
     private final static Random RANDOM = new Random();
     //==============================================================================================
     //==============================================================================================
-    private final static String[] SIGHTWORDS = new String[]{
-            "at", "his", "her", "be", "this", "have", "had", "or", "by", "all", "were", "we", "can", "there", "when", "what", "said", "them", "fun", "do",
-            "the", "like", "you", "went", "to", "of", "and", "in", "is", "that", "it", "he", "for", "was", "on", "are", "as", "with", "she", "they","yes","no","out","come"
+    private final static String[] LETTER = new String[]{
+            "a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"
     };
 
     @Deprecated
     protected int getGameDuration() {
-        return 4000;
+        return 2000;
     }
 
     @Override
@@ -30,10 +29,10 @@ public class SightWordsActivity extends GameActivity {
         List<String> selectedSightWords = new ArrayList<String>();
         Set<Integer> alreadyPickedIdx = new HashSet<Integer>();
         for (int i = 0; i < amountWordOnScreen; ) {
-            int a = RANDOM.nextInt(SIGHTWORDS.length);
+            int a = RANDOM.nextInt(LETTER.length);
             if (alreadyPickedIdx.contains(a)) continue;
             alreadyPickedIdx.add(a);
-            selectedSightWords.add(SIGHTWORDS[a]);
+            selectedSightWords.add(LETTER[a]);
             i++;
         }
         return selectedSightWords;

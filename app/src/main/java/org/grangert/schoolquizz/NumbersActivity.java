@@ -30,4 +30,9 @@ public class NumbersActivity extends GameActivity {
         }
         return responseChoices;
     }
+
+    @Override
+    protected int getAmountOfChoice() {
+        return 8;
+    }
 }

@@ -11,6 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="here, at, she, is" />
+    <Button
+        android:id="@+id/launchabc_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="A,B,C" />
 
     <Button
         android:id="@+id/launchnumbers_button"
@@ -18,4 +23,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="21, 12, 6, 8" />
+
+    <Button
+        android:id="@+id/fingercounting_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Finger counting" />
 </LinearLayout>
